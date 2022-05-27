@@ -16,13 +16,30 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var twntyPctButton: UIButton!
     @IBOutlet weak var splitNumberLabel: UILabel!
     
+    var tip = 0.10
+    
     @IBAction func tipChanged(_ sender: UIButton) {
+        
+        tenPctButton.isSelected = false
+        zeroPctButton.isSelected = false
+        twntyPctButton.isSelected = false
+        
+        sender.isSelected = true
+        
+        let buttonTitle = sender.currentTitle!
+        
+        //Remove the last character (%) from title then turn it back to string
+        let buttonTitleMinusPercentSign = String(buttonTitle.dropLast())
+        let buttonTitleAsNumber = Double(buttonTitleMinusPercentSign)!
+        tip = buttonTitleAsNumber / 100
+       
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
+       print(tip)
     }
 }
 
