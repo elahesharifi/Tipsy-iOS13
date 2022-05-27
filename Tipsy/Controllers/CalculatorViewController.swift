@@ -9,7 +9,7 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-
+    
     @IBOutlet weak var billTextField: UITextField!
     @IBOutlet weak var zeroPctButton: UIButton!
     @IBOutlet weak var tenPctButton: UIButton!
@@ -18,9 +18,10 @@ class CalculatorViewController: UIViewController {
     
     var tip = 0.10
     var numberOfPeople = 2
-    
+
     @IBAction func tipChanged(_ sender: UIButton) {
         
+        billTextField.endEditing(true)
         tenPctButton.isSelected = false
         zeroPctButton.isSelected = false
         twntyPctButton.isSelected = false
@@ -33,7 +34,7 @@ class CalculatorViewController: UIViewController {
         let buttonTitleMinusPercentSign = String(buttonTitle.dropLast())
         let buttonTitleAsNumber = Double(buttonTitleMinusPercentSign)!
         tip = buttonTitleAsNumber / 100
-       
+        
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
@@ -44,7 +45,13 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-       print(numberOfPeople)
-    }
+        
+        let billAmount = Double(billTextField.text!) ?? 0.0
+        let tipAmount = billAmount * tip // 25
+        let total = billAmount + tipAmount // 150 = 125 + 25
+        let result = total / Double(numberOfPeople)
+        print(Float(result))
+
+   }
 }
 
